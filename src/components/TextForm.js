@@ -54,19 +54,19 @@ export default function TextForm(props) {
         <div className="mb-3">
         <textarea className="form-control" onChange={handleOnChange} style={{backgroundColor: props.mode==='light'?'white':'#262424', color: props.mode==='light'?'black':'white'}} value={text} id="myBox" rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-1"  onClick={handleUpClick}>Convert to UpperCase</button>
-        <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to LowerCase</button>
-        <button className="btn btn-primary mx-1" onClick={handleclearClick}>Clear Text</button>
-        <button type="submit" onClick={handleCopy} className="btn btn-primary mx-2">Copy to clipboard</button>
-        <button type="submit" onClick={handleExtraSpacesClick} className="btn btn-primary mx-2">Remove Extra Spaces</button>
-        <button type="submit" onClick={handleSpeak} className="btn btn-danger mx-2">Speak</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={text.length===0}  onClick={handleUpClick}>Convert to UpperCase</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleLoClick}>Convert to LowerCase</button>
+        <button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleclearClick}>Clear Text</button>
+        <button type="submit" disabled={text.length===0} onClick={handleCopy} className="btn btn-primary mx-2">Copy to clipboard</button>
+        <button type="submit" disabled={text.length===0} onClick={handleExtraSpacesClick} className="btn btn-primary mx-2">Remove Extra Spaces</button>
+        <button type="submit" disabled={text.length===0} onClick={handleSpeak} className="btn btn-danger mx-2">Speak</button>
 
         
     </div>
     <div className="container my-3" style={{color: props.mode==='light'?'black':'white'}}>
         <h1>Your Text Summary</h1>
-        <p>{text.split(" ").length} words, {text.length} characters</p>
-        <p>{0.008 * text.split(" ").length} Minutes to read</p>
+        <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words, {text.length} characters</p>
+        <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes to read</p>
         <h2>Preview</h2>
         <p>{text.length? text: "Enter something to preview here"}</p>
     </div>
